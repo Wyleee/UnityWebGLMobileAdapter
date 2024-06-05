@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,minimal-ui">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<meta name="format-detection" content="telephone=yes">
+		<meta name="screen-orientation" content="true">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="full-screen" content="yes">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="360-fullscreen" content="true">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="x5-page-mode" content="app">
+		<meta name="browsermode" content="application">
+		<title>giegie</title>
+		<style>
+			html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video,button{margin:0;padding:0;font-style: normal;}
+			/*禁止浏览器修改字体大小*/
+			html{font-size: 12px;}
+			html body{
+				-webkit-text-size-adjust: none !important;
+				-moz-text-size-adjust: none !important;
+				-ms-text-size-adjust: none !important;
+				text-size-adjust: none !important;
+			}
+			a{text-decoration: none;}
+			a:hover,a:active,a:visited,a:link,a:focus{
+				-webkit-tap-highlight-color:rgba(0,0,0,0);
+				-webkit-tap-highlight-color: transparent;
+				outline:none;
+			}
+			body,html{height: 100%; overflow:hidden;position: relative;top: 0px;left:0px;}
+			.landscape-screen{
+				transform-origin: top left;
+				transform: rotate(90deg) translateY(-100%)
+			}
+			#Frame {
+				border-style: unset;
+				display: block
+			}
+		</style>
+	</head>
+	<body>
+		<iframe id="Frame" style="Frame"  src="game.html"></iframe>
+		<script>
+			var orientation = window.orientation;
+			
+			//开始时调用
+			var Frame = document.getElementById("Frame");
+			if(orientation == 180 || orientation == 0 || orientation == -180){
+				//注意竖屏时要把 iframe的宽设置为当前窗口的高度 高设置为当前窗口的宽度
+				Frame.height = window.innerWidth;
+				Frame.width = window.innerHeight;
+				
+				//通过css样式旋转90度
+				Frame.classList.add("landscape-screen");
+			}else
+			{
+				//横屏时则正常
+				Frame.height = window.innerHeight;
+				Frame.width = window.innerWidth;
+				
+				//通过移除类去掉css样式
+				Frame.classList.remove("landscape-screen");
+			}
+			
+			//监听手机旋转事件 根据旋转状态设置旋转的css样式
+			window.onorientationchange = function () {
+          		if(orientation == 180 || orientation == 0 || orientation == -180){
+					Frame.classList.add("landscape-screen");
+				}else{
+					Frame.classList.remove("landscape-screen");
+				}
+        	};
+		</script>
+	</body>
+</html>
